@@ -34,9 +34,11 @@ print("P(like | i) =", p_like_given_i)
 vocab_tokens = list(model.vocab)  # vocabulary object; contains tokens and <UNK>
 
 print(list(vocab_tokens)) # this has a placeholder 'UNK' for unseen words 
-raw = {w: model.score(w, ['i']) for w in vocab_tokens}
+raw = {w: model.score(w, ["<UNK>"]) for w in vocab_tokens}
+print(raw)
 total = sum(raw.values())
 dist = {w: (cnt/total if total>0 else 0.0) for w, cnt in raw.items()}
+print(dist)
 print("Next-word distribution given context ('i',):")
 print({k: v for k, v in dist.items() if v>0})
 
